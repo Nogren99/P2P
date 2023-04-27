@@ -82,43 +82,43 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_1.setLayout(new GridLayout(10, 0, 0, 0));
 		
 		this.panel_10 = new JPanel();
-		this.panel_10.setBackground(new Color(102, 205, 170));
+		this.panel_10.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_10);
 		
 		this.panel_11 = new JPanel();
-		this.panel_11.setBackground(new Color(102, 205, 170));
+		this.panel_11.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_11);
 		
 		this.panel_12 = new JPanel();
-		this.panel_12.setBackground(new Color(102, 205, 170));
+		this.panel_12.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_12);
 		
 		this.panel_13 = new JPanel();
-		this.panel_13.setBackground(new Color(102, 205, 170));
+		this.panel_13.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_13);
 		
 		this.panel_14 = new JPanel();
-		this.panel_14.setBackground(new Color(102, 205, 170));
+		this.panel_14.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_14);
 		
 		this.panel_15 = new JPanel();
-		this.panel_15.setBackground(new Color(102, 205, 170));
+		this.panel_15.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_15);
 		
 		this.panel_16 = new JPanel();
-		this.panel_16.setBackground(new Color(102, 205, 170));
+		this.panel_16.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_16);
 		
 		this.panel_17 = new JPanel();
-		this.panel_17.setBackground(new Color(102, 205, 170));
+		this.panel_17.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_17);
 		
 		this.panel_18 = new JPanel();
-		this.panel_18.setBackground(new Color(102, 205, 170));
+		this.panel_18.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_18);
 		
 		this.panel_9 = new JPanel();
-		this.panel_9.setBackground(new Color(102, 205, 170));
+		this.panel_9.setBackground(new Color(156, 191, 181));
 		this.panel_1.add(this.panel_9);
 		
 		this.lblNewLabel_3 = new JLabel("Escucha: OFF");
@@ -130,11 +130,11 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_2.setLayout(new GridLayout(5, 1, 0, 0));
 		
 		this.panel_4 = new JPanel();
-		this.panel_4.setBackground(new Color(102, 205, 170));
+		this.panel_4.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_4);
 		
 		this.panel_5 = new JPanel();
-		this.panel_5.setBackground(new Color(102, 205, 170));
+		this.panel_5.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -143,7 +143,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_5.add(this.lblNewLabel);
 		
 		this.panel_6 = new JPanel();
-		this.panel_6.setBackground(new Color(102, 205, 170));
+		this.panel_6.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_6);
 		
 		this.lblNewLabel_1 = new JLabel("Dirección IP");
@@ -159,7 +159,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_7.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		this.panel_19 = new JPanel();
-		this.panel_19.setBackground(new Color(102, 205, 170));
+		this.panel_19.setBackground(new Color(195, 222, 214));
 		this.panel_7.add(this.panel_19);
 		
 		this.lblNewLabel_2 = new JLabel("Puerto");
@@ -167,7 +167,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_19.add(this.lblNewLabel_2);
 		
 		this.panel_20 = new JPanel();
-		this.panel_20.setBackground(new Color(102, 205, 170));
+		this.panel_20.setBackground(new Color(195, 222, 214));
 		this.panel_7.add(this.panel_20);
 		
 		this.textField_1 = new JTextField();
@@ -175,7 +175,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.textField_1.setColumns(10);
 		
 		this.panel_8 = new JPanel();
-		this.panel_8.setBackground(new Color(102, 205, 170));
+		this.panel_8.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_8);
 		
 		this.btnNewButton = new JButton("Iniciar Sesión");
@@ -183,7 +183,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_8.add(this.btnNewButton);
 		
 		this.panel_3 = new JPanel();
-		this.panel_3.setBackground(new Color(102, 205, 170));
+		this.panel_3.setBackground(new Color(195, 222, 214));
 		this.panel_3.setForeground(new Color(102, 205, 170));
 		this.panel.add(this.panel_3);
 	}

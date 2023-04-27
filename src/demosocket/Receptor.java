@@ -26,7 +26,6 @@ public class Receptor extends javax.swing.JFrame {
         try {
         jTextField1.setText(InetAddress.getLocalHost().getHostAddress());
         } catch (Exception e) {
-            
         }
         
     }

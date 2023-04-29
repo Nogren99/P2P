@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import negocio.Sistema;
 import vista.Ivista;
+import vista.SistemaDeMensajeria;
 import vista.Bienvenido;
 import vista.Chat;
 import vista.Inicio;
@@ -24,7 +25,7 @@ public class ControladorSistema implements ActionListener {
 	}
 
 	public ControladorSistema() {
-        this.vista = new Inicio();
+        this.vista = new SistemaDeMensajeria();
         this.vista.setActionListener(this);
         this.vista.mostrar();
     }
@@ -46,13 +47,20 @@ public class ControladorSistema implements ActionListener {
         //aca deberiamos tomar el ip(string) y puerto(int) y llamar a sistema.AbrirAplicacion
         System.out.println("Comando: " + comando);
         
-        if (comando.equalsIgnoreCase("Iniciar Sesión")) {
+        if (comando.equalsIgnoreCase("Crear")) {
+        	this.vista.cerrar();
+        	this.setVista(new Inicio());
+        }else if (comando.equalsIgnoreCase("Unirse")) {
+        	this.vista.cerrar();
+        	this.setVista(new Bienvenido());
+        }else if (comando.equalsIgnoreCase("Iniciar Sesión")) {
         	Inicio ventana = (Inicio) this.vista;
         	int puerto = Integer.parseInt( ventana.getTextField_1().getText() );
         	System.out.println(puerto);
-        	sistema.AbrirAplicacion(puerto);
+        	sistema.Servidor(puerto);
         	this.vista.cerrar();
-        	this.setVista(new Bienvenido());
+        	this.setVista(new Chat());
+        	
         } else if (comando.equalsIgnoreCase("Conectarse")){
         	System.out.println("a");
         	Bienvenido ventana = (Bienvenido) this.vista;

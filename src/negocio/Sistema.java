@@ -11,10 +11,6 @@ public class Sistema {
 	        return instancia;
 	    }
 	
-	//REFERENTE A LA VENTANA 1. EL USUARIO ABRE SU SERVIDOR Y QUEDA EN MODO ESCUCHA
-	
-	//no se si es muy representativo pero asi se llama en el CU lol
-	
 	private ServerSocket servidor = null;
 	private String msg = "";
 	
@@ -29,7 +25,7 @@ public class Sistema {
 		this.msg = msg;
 	}
 
-	public void AbrirAplicacion(int puerto) {
+	public void Servidor(int puerto) {
 		
 		try {
 			
@@ -139,6 +135,12 @@ public class Sistema {
             //Creamos el socket y nos conectamos al usuario
             Socket socket = new Socket(ip, puerto);
             System.out.println("conexion establecida");
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            //out.println(jTextArea1.getText());
+            out.close();
+            socket.close();
+            //jTextArea1.setText("");
             
             /*
              * Socket socket = new Socket(jTextField1.getText(),Integer.parseInt(jTextField2.getText()));

@@ -120,6 +120,7 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.setVisible(true);
 	}
 
+	
 
 	public void setActionListener(ActionListener actionListener) {
 		this.btnNewButton.addActionListener(actionListener);

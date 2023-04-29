@@ -119,7 +119,8 @@ public class Receptor extends javax.swing.JFrame {
                         Socket soc = s.accept();
                         PrintWriter out = new PrintWriter(soc.getOutputStream(), true);
                         BufferedReader in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-
+                        System.out.println(in);
+                        
                         String msg = in.readLine();
                         jTextArea1.append(msg + "\n");
                     }

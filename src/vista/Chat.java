@@ -70,6 +70,8 @@ public class Chat extends JFrame implements Ivista {
 	 * Create the frame.
 	 */
 	public Chat() {
+		this.modeloListaEnviados=new DefaultListModel();
+		this.modeloListaRecibidos=new DefaultListModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
@@ -180,6 +182,7 @@ public class Chat extends JFrame implements Ivista {
 		this.panel_1.add(this.panel_3, BorderLayout.EAST);
 		
 		this.btnNewButton = new JButton("Enviar ");
+		btnNewButton.setActionCommand("Enviar");
 		this.btnNewButton.setFont(new Font("Microsoft JhengHei", Font.BOLD, 13));
 		this.panel_3.add(this.btnNewButton);
 	}
@@ -206,6 +209,10 @@ public class Chat extends JFrame implements Ivista {
 
 	public DefaultListModel getModeloListaRecibidos() {
 		return modeloListaRecibidos;
+	}
+
+	public JTextField getTextField() {
+		return textField;
 	}
 	
 	

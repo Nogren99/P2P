@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 
-public class Inicio extends JFrame implements Ivista {
+public class Bienvenido extends JFrame implements Ivista {
 
 	private JPanel contentPane;
 	private ActionListener actionListener;
@@ -52,7 +52,7 @@ public class Inicio extends JFrame implements Ivista {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio frame = new Inicio();
+					Bienvenido frame = new Bienvenido();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class Inicio extends JFrame implements Ivista {
 	/**
 	 * Create the frame.
 	 */
-	public Inicio() {
+	public Bienvenido() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -121,7 +121,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_9.setBackground(new Color(156, 191, 181));
 		this.panel_1.add(this.panel_9);
 		
-		this.lblNewLabel_3 = new JLabel("Escucha: OFF");
+		this.lblNewLabel_3 = new JLabel("Escucha: ON");
 		this.lblNewLabel_3.setFont(new Font("Segoe UI Historic", Font.PLAIN, 12));
 		this.panel_9.add(this.lblNewLabel_3);
 		
@@ -138,7 +138,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.lblNewLabel = new JLabel("Configuración");
+		this.lblNewLabel = new JLabel("Bienvenido");
 		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
 		this.panel_5.add(this.lblNewLabel);
 		
@@ -178,7 +178,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_8.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_8);
 		
-		this.btnNewButton = new JButton("Iniciar Sesión");
+		this.btnNewButton = new JButton("Conectarse");
 		this.btnNewButton.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
 		this.panel_8.add(this.btnNewButton);
 		
@@ -199,6 +199,9 @@ public class Inicio extends JFrame implements Ivista {
 		this.setVisible(true);
 	}
 
+	public JTextField getTextField() {
+		return textField;
+	}
 	
 	public JTextField getTextField_1() {
 		return textField_1;

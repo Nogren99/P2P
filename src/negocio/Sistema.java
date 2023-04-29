@@ -14,18 +14,73 @@ public class Sistema {
 	//REFERENTE A LA VENTANA 1. EL USUARIO ABRE SU SERVIDOR Y QUEDA EN MODO ESCUCHA
 	
 	//no se si es muy representativo pero asi se llama en el CU lol
-	public void AbrirAplicacion(String ip, int puerto) {
+	
+	private ServerSocket servidor = null;
+	private String msg = "";
+	
+	
+	
+	
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public void AbrirAplicacion(int puerto) {
 		
 		try {
+			
+			String ip="";
+			InetAddress adress;
+			adress = InetAddress.getLocalHost();
+			ip= adress.getHostAddress();
+			System.out.println("ip:"+ip+" puerto : "+puerto);
+
+			
 
             //Creamos el socket de servidor y esperamos a que un usuario se conecte
-            ServerSocket servidor = new ServerSocket(puerto);
-            System.out.println("Esperando conexión en el puerto " + puerto + "...");
+            //servidor = new ServerSocket(puerto);
+            //System.out.println("Esperando conexión en el puerto " + puerto + "...");
+            
+            new Thread() {
+                public void run() {
+                    try {
+                        ServerSocket servidor = new ServerSocket(puerto);
+                        //jTextArea1.append("Esperando conexiones en puerto " + jTextField1.getText() + "\n");
+
+                        while (true) {
+                            Socket soc = servidor.accept();
+                            
+                            PrintWriter out = new PrintWriter(soc.getOutputStream(), true);
+                            BufferedReader in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+                            System.out.println(in);
+                            
+                            msg = in.readLine();
+                            
+                            System.out.println("/msj:"+msg);
+                            
+                            
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage() + "\n");
+                    }
+                    System.out.println("fin");
+
+                }
+            }.start();
+            
+            
+            /*
             Socket socket = servidor.accept();
             System.out.println("Conexión establecida con el usuario " + socket.getInetAddress().getHostName());
 
-            
-            
+            */
+            /*
             //====VENTANA 3 - CHAT=======================
             
             //Creamos los flujos de entrada y salida para enviar y recibir mensajes
@@ -42,13 +97,13 @@ public class Sistema {
             //cerramos flujos
             salida.close();
             entrada.close();
-          //==============================================
-            
+          	//==============================================
+            */
             
             // Cerramos socket
             
-            socket.close();
-            servidor.close();
+            
+            //servidor.close();
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -58,16 +113,41 @@ public class Sistema {
 	
 	//REFERENTE A LA VENTANA 2. EL USUARIO SE CONECTA A OTRO SERVIDOR(ACTUA COMO CLIENTE)
 	
-	public void cliente() {
-		String host = "127.0.0.1"; // Dirección IP del usuario con el que queremos establecer la conexión
-        int puerto = 5000; // Puerto en el que el usuario está escuchando
+	public void servidor() {
+		Socket socket;
+		try {
+			socket = servidor.accept();
+			System.out.println("Conexión establecida con el usuario " + socket.getInetAddress().getHostName());
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void cliente(String  ip, int puerto) {
+		
+		
+         
+         
+		//String host = "127.0.0.1"; // Dirección IP del usuario con el que queremos establecer la conexión
+        //int puerto = 5000; // Puerto en el que el usuario está escuchando
 
         try {
 
-            // Creamos el socket y nos conectamos al usuario
-            Socket socket = new Socket(host, puerto);
+            //Creamos el socket y nos conectamos al usuario
+            Socket socket = new Socket(ip, puerto);
+            System.out.println("conexion establecida");
             
-            
+            /*
+             * Socket socket = new Socket(jTextField1.getText(),Integer.parseInt(jTextField2.getText()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out.println(jTextArea1.getText());
+            out.close();
+            socket.close();
+            jTextArea1.setText("");
             //====VENTANA 3 - CHAT=======================
 
             // Creamos los flujos de entrada y salida para enviar y recibir mensajes
@@ -86,9 +166,9 @@ public class Sistema {
             entrada.close();
             
           //==============================================
-            
+            */
 
-            // Cerramos socket
+            //Cerramos socket
             
             socket.close();
 

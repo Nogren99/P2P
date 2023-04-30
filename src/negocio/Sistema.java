@@ -5,17 +5,13 @@ import java.net.*;
 public class Sistema {
 
 	private static Sistema instancia;
+	private ServerSocket servidor = null;
+	private String msg = "";
 	public static Sistema getInstancia() {
 	        if (instancia == null)
 	            instancia = new Sistema();
 	        return instancia;
 	    }
-	
-	private ServerSocket servidor = null;
-	private String msg = "";
-	
-	
-	
 	
 	public String getMsg() {
 		return msg;
@@ -28,11 +24,11 @@ public class Sistema {
 	public void Servidor(int puerto) {
 		
 		try {
-			
-			String ip="";
+			//Obtenemos automaticamente el ip
+			String ip = "";
 			InetAddress adress;
 			adress = InetAddress.getLocalHost();
-			ip= adress.getHostAddress();
+			ip = adress.getHostAddress();
 			System.out.println("ip:"+ip+" puerto : "+puerto);
 
 			
@@ -61,9 +57,9 @@ public class Sistema {
                             
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        System.out.println(e.getMessage() + "\n");
+                    } catch (Exception HiloServerException) {
+                    	HiloServerException.printStackTrace();
+                        System.out.println(HiloServerException.getMessage() + "\n");
                     }
                     System.out.println("fin");
 
@@ -101,8 +97,8 @@ public class Sistema {
             
             //servidor.close();
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (Exception ServerException) {
+            System.out.println("Error: " + ServerException.getMessage());
         }
 		
 	}
@@ -174,8 +170,8 @@ public class Sistema {
             
             socket.close();
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (Exception ClienteException) {
+            System.out.println("Error: " + ClienteException.getMessage());
         }
 	}
 	

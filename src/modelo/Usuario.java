@@ -5,8 +5,6 @@ public class Usuario {
 	private int ip;
 	private int port;
 	
-	
-	
 	public Usuario(int ip, int port) {
 		super();
 		this.ip = ip;
@@ -24,9 +22,5 @@ public class Usuario {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	
-	
-	
-	
 
 }

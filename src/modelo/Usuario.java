@@ -1,26 +1,54 @@
 package modelo;
 
-public class Usuario {
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import modelo.Usuario;
+
+public class Usuario implements Runnable {
 	
-	private int ip;
-	private int port;
+	public static Usuario instancia;
+	private String nombre;
+	private String ip;
+	private static int puerto;
 	
-	public Usuario(int ip, int port) {
-		super();
-		this.ip = ip;
-		this.port = port;
+	
+	public static Usuario getInstance()  {
+        if (instancia == null)
+            instancia = new Usuario();
+        return instancia;
+    }
+	
+	
+	
+
+
+
+	public String getNombre() {
+		return nombre;
 	}
-	public int getIp() {
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getIp() {
 		return ip;
 	}
-	public void setIp(int ip) {
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public int getPort() {
-		return port;
+	public int getPuerto() {
+		return puerto;
 	}
-	public void setPort(int port) {
-		this.port = port;
+	public void setPuerto(int port) {
+		this.puerto = port;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

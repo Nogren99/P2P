@@ -99,8 +99,9 @@ public class Emisor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+    	System.out.println("EMISOR ");
         try {
+        	System.out.println("EMISOR ");
             Socket socket = new Socket(jTextField1.getText(),Integer.parseInt(jTextField2.getText()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

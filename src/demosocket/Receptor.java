@@ -108,6 +108,7 @@ public class Receptor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+    	System.out.println("EJECUTE TODO EL HILO SIN DEJAR CAR UNA SOLA GOTA Q NO SEA QESESO");
         new Thread() {
             public void run() {
                 try {
@@ -122,6 +123,7 @@ public class Receptor extends javax.swing.JFrame {
                         System.out.println(in);
                         
                         String msg = in.readLine();
+                        System.out.println(msg);
                         jTextArea1.append(msg + "\n");
                     }
 

@@ -121,7 +121,7 @@ public class Bienvenido extends JFrame implements Ivista {
 		this.panel_9.setBackground(new Color(156, 191, 181));
 		this.panel_1.add(this.panel_9);
 		
-		this.lblNewLabel_3 = new JLabel("Escucha: ON");
+		this.lblNewLabel_3 = new JLabel();
 		this.lblNewLabel_3.setFont(new Font("Segoe UI Historic", Font.PLAIN, 12));
 		this.panel_9.add(this.lblNewLabel_3);
 		
@@ -138,7 +138,7 @@ public class Bienvenido extends JFrame implements Ivista {
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.lblNewLabel = new JLabel("Bienvenido");
+		this.lblNewLabel = new JLabel("Conectarse a:");
 		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
 		this.panel_5.add(this.lblNewLabel);
 		

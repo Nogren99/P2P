@@ -121,7 +121,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_9.setBackground(new Color(156, 191, 181));
 		this.panel_1.add(this.panel_9);
 		
-		this.lblNewLabel_3 = new JLabel("Escucha: OFF");
+		this.lblNewLabel_3 = new JLabel();
 		this.lblNewLabel_3.setFont(new Font("Segoe UI Historic", Font.PLAIN, 12));
 		this.panel_9.add(this.lblNewLabel_3);
 		
@@ -138,7 +138,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.lblNewLabel = new JLabel("Configuración");
+		this.lblNewLabel = new JLabel("Configuración del Servidor");
 		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
 		this.panel_5.add(this.lblNewLabel);
 		
@@ -146,7 +146,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_6.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_6);
 		
-		this.lblNewLabel_1 = new JLabel("Dirección IP");
+		this.lblNewLabel_1 = new JLabel("Nombre usuario");
 		this.lblNewLabel_1.setFont(new Font("Segoe UI Historic", Font.PLAIN, 12));
 		this.panel_6.add(this.lblNewLabel_1);
 		
@@ -202,6 +202,10 @@ public class Inicio extends JFrame implements Ivista {
 	
 	public JTextField getTextField_1() {
 		return textField_1;
+	}
+	
+	public JTextField getTextField() {
+		return textField;
 	}
 
 	public void setTextField_1(JTextField textField_1) {

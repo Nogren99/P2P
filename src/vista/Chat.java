@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class Chat extends JFrame implements Ivista {
 
@@ -30,26 +31,18 @@ public class Chat extends JFrame implements Ivista {
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JPanel panel_6;
-	private JPanel panel_7;
 	private JPanel panel_8;
 	private JScrollPane scrollPane;
-	private JList list;
 	private JPanel panel_9;
 	private JPanel panel_10;
 	private JPanel panel_11;
 	private JPanel panel_12;
-	private JPanel panel_13;
-	private JScrollPane scrollPane_1;
-	private JPanel panel_14;
-	private JPanel panel_15;
-	private JPanel panel_16;
-	private JPanel panel_17;
-	private JList list_1;
 	private ActionListener actionListener;
 	private DefaultListModel modeloListaEnviados;
 	private DefaultListModel modeloListaRecibidos;
 	private JPanel panel_18;
 	private JPanel panel_19;
+	private JTextArea textArea;
 	/**
 	 * Launch the application.
 	 */
@@ -97,9 +90,8 @@ public class Chat extends JFrame implements Ivista {
 		this.scrollPane = new JScrollPane();
 		this.panel_8.add(this.scrollPane);
 		
-		this.list = new JList();
-		this.list.setModel(modeloListaEnviados);
-		this.scrollPane.setViewportView(this.list);
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 		
 		this.panel_9 = new JPanel();
 		this.panel_9.setBackground(new Color(102, 205, 170));
@@ -117,37 +109,6 @@ public class Chat extends JFrame implements Ivista {
 		this.panel_12 = new JPanel();
 		this.panel_12.setBackground(new Color(102, 205, 170));
 		this.panel_6.add(this.panel_12, BorderLayout.EAST);
-		
-		this.panel_7 = new JPanel();
-		this.panel.add(this.panel_7);
-		this.panel_7.setLayout(new BorderLayout(0, 0));
-		
-		this.panel_13 = new JPanel();
-		this.panel_7.add(this.panel_13, BorderLayout.CENTER);
-		this.panel_13.setLayout(new BorderLayout(0, 0));
-		
-		this.scrollPane_1 = new JScrollPane();
-		this.panel_13.add(this.scrollPane_1, BorderLayout.CENTER);
-		
-		this.list_1 = new JList();
-		this.list_1.setModel(modeloListaRecibidos);
-		this.scrollPane_1.setViewportView(this.list_1);
-		
-		this.panel_14 = new JPanel();
-		this.panel_14.setBackground(new Color(102, 205, 170));
-		this.panel_7.add(this.panel_14, BorderLayout.NORTH);
-		
-		this.panel_15 = new JPanel();
-		this.panel_15.setBackground(new Color(102, 205, 170));
-		this.panel_7.add(this.panel_15, BorderLayout.SOUTH);
-		
-		this.panel_16 = new JPanel();
-		this.panel_16.setBackground(new Color(102, 205, 170));
-		this.panel_7.add(this.panel_16, BorderLayout.WEST);
-		
-		this.panel_17 = new JPanel();
-		this.panel_17.setBackground(new Color(102, 205, 170));
-		this.panel_7.add(this.panel_17, BorderLayout.EAST);
 		
 		this.panel_1 = new JPanel();
 		this.contentPane.add(this.panel_1, BorderLayout.SOUTH);
@@ -196,6 +157,8 @@ public class Chat extends JFrame implements Ivista {
 	public void mostrar() {
 		this.setVisible(true);
 	}
+	
+	
 
 	@Override
 	public void setActionListener(ActionListener actionListener) {
@@ -213,6 +176,10 @@ public class Chat extends JFrame implements Ivista {
 
 	public JTextField getTextField() {
 		return textField;
+	}
+	
+	public JTextArea getTextArea() {
+		return textArea;
 	}
 	
 	

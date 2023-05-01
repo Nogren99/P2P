@@ -2,8 +2,9 @@
 
 GRUPO 6 - Universidad Nacional de Mar del Plata.
 
-![h1](https://user-images.githubusercontent.com/69020112/235544911-a53bc803-e16b-4991-855e-35cd702cffc0.png)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/69020112/235544911-a53bc803-e16b-4991-855e-35cd702cffc0.png" />
+</p>
 
 Se construyó un sistema de mensajería P2P el cual seguía las características brindadas por la cátedra de Análisis y Diseño de Sistemas 2:
 * Una vez iniciada una sesión entre dos usuarios, los mismos pueden intercambiar toda la cantidad de mensajes que quieran hasta que uno de los dos participantes cierre la sesión.

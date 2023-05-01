@@ -56,8 +56,7 @@ public class ControladorSistema implements ActionListener, Runnable {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-        //aca deberiamos tomar el ip(string) y puerto(int) y llamar a sistema.AbrirAplicacion
-        System.out.println("Comando: " + comando);
+        //System.out.println("Comando: " + comando);
         
         if (comando.equalsIgnoreCase("Crear")) {
         	this.vista.cerrar();
@@ -66,70 +65,59 @@ public class ControladorSistema implements ActionListener, Runnable {
         	this.vista.cerrar();
         	this.setVista(new Bienvenido());
         	
-        	//VENTANA DE CONFIGURACION
+        //====VENTANA DE CONFIGURACION=====
         }else if (comando.equalsIgnoreCase("Iniciar Sesión")) {
         	Inicio ventana = (Inicio) this.vista;
+        	
         	int puerto = Integer.parseInt( ventana.getTextField_1().getText() );
         	String nombre = ventana.getTextField().getText();
-        	
         	Usuario.getInstance().setNombre(nombre);
         	Usuario.getInstance().setPuerto(puerto);
-        	
-        	//estaaba en usuario
+        	System.out.println("Inicio en puerto: "+ puerto+" username: "+nombre);
+
             Thread hilo = new Thread(Sistema.getInstancia());
             hilo.start();
-        	
-        	System.out.println(puerto);
-        	System.out.println(nombre);
-        	
-        	
+
         	this.vista.cerrar();
-        	this.setVista(new Chat());
+        	this.setVista(new Chat());        	
         	
         	
-        	
-        	//VENTANA DE BIENVENIDO
+        //=====VENTANA DE BIENVENIDO====
         } else if (comando.equalsIgnoreCase("Conectarse")){
-        	System.out.println("a");
         	Bienvenido ventana = (Bienvenido) this.vista;
-        	//Agregar nombre a la ventana
-        	Usuario.getInstance().setNombre("pepe");
+        	
+        	//MIS DATOS:
+        	Usuario.getInstance().setNombre(ventana.getTextField_2().getText());
         	try {
 				Usuario.getInstance().setIp(InetAddress.getLocalHost().getHostAddress());
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
 			}
         	
-        	
+        	//DATOS DEL USUARIO AL QUE ME CONECTO
         	String ip = ventana.getTextField().getText();
         	int puerto = Integer.parseInt( ventana.getTextField_1().getText() );
-        	
         	System.out.println("me conecto a:"+ip+ "puerto"+puerto);
         	
-        	//Usuario servidor = new Usuario("",ip,puerto);
+        	//SOLICITO INICIAR CHAT
         	this.sistema.solicitarChat(ip, puerto);
-        	
         	this.vista.cerrar();
-        	//this.setVista(new Chat());
         	
+        	
+        //====VENTANA DE CHAT====
         }else if (comando.equalsIgnoreCase("Enviar")){
-        	System.out.println("envio mensajito");
         	Chat ventana = (Chat) this.vista;
         	String msj = ventana.getTextField().getText();
-        	System.out.println(msj);
+        	System.out.println("mensaje: "+msj);
         	
         	try {
-        		System.out.println("trai" );
                 if (msj != null && !msj.isEmpty()) {
                     this.sistema.enviarMensaje(msj);
-                    ventana.getTextArea().append(msj+"\n");
-                    System.out.println("entro" );
+                    ventana.getTextArea().append(Usuario.getInstance().getNombre()+" : " +msj+"\n");
                 }
             } catch (IOException ex) {
-            	System.out.println("catch" );
                 throw new RuntimeException(ex);
             }
-        	System.out.println("sigo" );
         }
     }
     
@@ -144,14 +132,23 @@ public class ControladorSistema implements ActionListener, Runnable {
 	public void run() {
 		Chat vista = (Chat) this.vista;
 		try {
+			
 			String mensaje =  this.sistema.recibirMensaje();
+			vista.getTextArea().setEditable(true);
 			vista.getTextArea().append(mensaje);
+			vista.getTextArea().setEditable(false);
 			//while(true) {
 				
 				//this.vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
 				
 			//}
-		}finally {
+			// Lee el primer caracter para checkear que siga establecida la conexion
+            
+		}/*catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		finally {
 			
 		}
 		

@@ -28,14 +28,14 @@ public class Sistema implements Runnable {
     public void solicitarChat(String ip, int puerto) {
     	System.out.println("meotod solicitarChat / "+ "ip:"+ip+" puerto :"+puerto);
     	try {
-    		socket = new Socket(ip,puerto);
+    		this.socket = new Socket(ip,puerto);
             this.solicitud = true;
             this.inSocket= new InputStreamReader(socket.getInputStream());
             this.in = new BufferedReader(inSocket);
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.out.println(Usuario.getInstance().getNombre());
             if (this.solicitud) {
-                controlador.getInstancia().ventanaChat();
+                ControladorSistema.getInstancia().ventanaChat();
             }
     	} catch (IOException e) {
     	}
@@ -43,8 +43,8 @@ public class Sistema implements Runnable {
     }
     
     public void enviarMensaje(String mensaje) throws IOException {
-        out.println(mensaje);
-        System.out.println("metodo enviarMensaje"+mensaje);
+        this.out.println(mensaje);
+        System.out.println("metodo enviarMensaje: "+mensaje);
     }
 
     
@@ -52,6 +52,8 @@ public class Sistema implements Runnable {
     @Override
     public void run() {
         try {
+        	
+        	//ACTIVO MODO ESCUCHA
         	System.out.println("Modo escucha activado.");
         	this.socketServer = new ServerSocket(this.user.getPuerto());
         	System.out.println(this.user.getPuerto());
@@ -60,30 +62,34 @@ public class Sistema implements Runnable {
             socketServer = null;
             
             
-            //llamado
-            
+            //INICIO ENTRADAS Y SALIDAS
             this.inSocket= new InputStreamReader(socket.getInputStream());
             this.in = new BufferedReader(inSocket);
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.out.println(Usuario.getInstance().getNombre());
             System.out.println("mi nombre es "+this.user.getNombre()+" y me conecte con mi amiguito "+ this.in.readLine());
-            // in.readLine();
             if (this.solicitud) {
-                controlador.getInstancia().ventanaChat();
-            }else{
-            	//que aparezca el user en la lista de los que se quieren conectar
+                ControladorSistema.getInstancia().ventanaChat();
             }
             
         } catch (IOException e) {
         }
     }
 
+	public BufferedReader getIn() {
+		return in;
+	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+
 	public String recibirMensaje() {
 		String mensaje="";
-		System.out.println("metodo recibirMensaje"+mensaje);
+		System.out.println("metodo recibirMensaje: "+mensaje);
 		try {
 			mensaje = this.in.readLine();
-			System.out.println("metodo recibirMensaje"+mensaje);
+			System.out.println("metodo recibirMensaje: "+mensaje);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +98,6 @@ public class Sistema implements Runnable {
 	}
 
 
-	
 	    
 }
 

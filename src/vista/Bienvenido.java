@@ -215,6 +215,10 @@ public class Bienvenido extends JFrame implements Ivista {
 	public JTextField getTextField_1() {
 		return textField_1;
 	}
+	
+	public JTextField getTextField_2() {
+		return textField_2;
+	}
 
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;

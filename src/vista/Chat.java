@@ -11,6 +11,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
@@ -18,8 +20,9 @@ import javax.swing.JList;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import controlador.ControladorSistema;
 
-public class Chat extends JFrame implements Ivista {
+public class Chat extends JFrame implements Ivista, WindowListener {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -63,6 +66,7 @@ public class Chat extends JFrame implements Ivista {
 	 * Create the frame.
 	 */
 	public Chat() {
+		this.addWindowListener(this);
 		this.modeloListaEnviados=new DefaultListModel();
 		this.modeloListaRecibidos=new DefaultListModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,6 +184,48 @@ public class Chat extends JFrame implements Ivista {
 	
 	public JTextArea getTextArea() {
 		return textArea;
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		ControladorSistema.getInstancia().cerrarVentana();
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

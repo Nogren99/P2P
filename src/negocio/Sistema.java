@@ -17,7 +17,6 @@ public class Sistema implements Runnable {
     private BufferedReader in;
     private InputStreamReader  inSocket;
 	boolean escucha;
-	private boolean solicitud = false;
 	
 	public static Sistema getInstancia() {
 	        if (instancia == null)
@@ -25,20 +24,16 @@ public class Sistema implements Runnable {
 	        return instancia;
 	    }
 	
+	//
     public void solicitarChat(String ip, int puerto) {
     	System.out.println(this.user.getNombre()+" | meotod solicitarChat | "+ "ip:"+ip+" puerto :"+puerto);
     	try {
     		this.socket = new Socket(ip,puerto);
-            this.solicitud = true;
             this.inSocket= new InputStreamReader(socket.getInputStream());
             this.in = new BufferedReader(inSocket);
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.out.println(Usuario.getInstance().getNombre());
-            System.out.println("deberia decir true: "+this.solicitud);
-            
-            if (this.solicitud) {
-                ControladorSistema.getInstancia().ventanaChat();
-            }
+            ControladorSistema.getInstancia().ventanaChat();
     	} catch (IOException e) {
     	}
         
@@ -72,7 +67,7 @@ public class Sistema implements Runnable {
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.out.println(Usuario.getInstance().getNombre());
             System.out.println("mi nombre es "+this.user.getNombre()+" y me conecte con mi amiguito "+ this.in.readLine());
-            System.out.println("solicitud HOIST:"+this.solicitud);
+
             
             ControladorSistema.getInstancia().ventanaChat();
             
@@ -97,11 +92,23 @@ public class Sistema implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println(this.user.getNombre()+" |metodo recibirMensaje: | "+mensaje);
 		return mensaje;
 	}
 
-
+	public void cerrarSockets() {
+		try {
+			this.socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        this.socket = null;
+        this.out = null;
+        this.in = null;
+        this.inSocket = null;
+	}
 	    
 }
 

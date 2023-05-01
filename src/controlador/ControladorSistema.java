@@ -2,10 +2,12 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import modelo.Usuario;
@@ -21,6 +23,7 @@ public class ControladorSistema implements ActionListener, Runnable {
 
 	
 	private Ivista vista;
+	private WindowListener escuchaVentana;
     private Sistema sistema = Sistema.getInstancia();
     private JTextField textField;
     private String msj;
@@ -74,7 +77,15 @@ public class ControladorSistema implements ActionListener, Runnable {
         	String nombre = ventana.getTextField().getText();
         	Usuario.getInstance().setNombre(nombre);
         	Usuario.getInstance().setPuerto(puerto);
+        	
         	System.out.println("Inicio en puerto: "+ puerto+" username: "+nombre);
+        	try {
+        		Usuario.getInstance().setIp(InetAddress.getLocalHost().getHostAddress());
+				System.out.println("Inicio en ip: "+ Usuario.getInstance().getIp());
+			}catch (UnknownHostException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}finally { } 
 
             Thread hilo = new Thread(Sistema.getInstancia());
             hilo.start();
@@ -132,27 +143,39 @@ public class ControladorSistema implements ActionListener, Runnable {
     	this.comunicacion = new Thread(this);
     	this.comunicacion.start();
     }
+    
+    public void cerrarVentana() {
+    	System.out.println("cierro ventana");
+    	Sistema.getInstancia().cerrarSockets();
+    	/////////////////mando mengaje a la red
+    	
+    	this.comunicacion.interrupt();
+    }
 
 	@Override
 	public void run() {
 		Chat vista = (Chat) this.vista;
 		try {
-			while (!Sistema.getInstancia().getSocket().isInputShutdown()){
+			while (!Sistema.getInstancia().getSocket().isInputShutdown() ){
 				String mensaje =  this.sistema.recibirMensaje();
-				vista.getTextArea().setEditable(true);
-				//System.out.println("mensaje de:"+Sistema.getInstancia().getIn().readLine());
-				System.out.println("el mensaje:"+mensaje);
-				vista.getTextArea().append("Tu contacto: "+mensaje+"\n");
-				vista.getTextArea().setEditable(false);
-				
+				//Si el mensaje es null es debido a que el otro usuario cerro la comunicacion
+				if (mensaje==null) 
+	                break;
+				else {
+					vista.getTextArea().setEditable(true);
+					//System.out.println("mensaje de:"+Sistema.getInstancia().getIn().readLine());
+					System.out.println("el mensaje:"+mensaje);
+					vista.getTextArea().append("Tu contacto: "+mensaje+"\n");
+					vista.getTextArea().setEditable(false);
+				}
 			}
-			
+			this.vista.cerrar();
+			this.cerrarVentana();
 		}/*catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
 		finally {
-			
 		}
 		
 	}

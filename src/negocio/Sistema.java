@@ -11,6 +11,11 @@ public class Sistema implements Runnable {
 	private static ControladorSistema controlador;
 	private ServerSocket servidor = null;
 	private Usuario user = Usuario.getInstance();
+	private ServerSocket socketServer;
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private InputStreamReader  inSocket;
 	boolean escucha;
 	private boolean solicitud;
 	
@@ -21,13 +26,14 @@ public class Sistema implements Runnable {
 	    }
 	
     public void solicitarChat(String ip, int puerto) {
+    	System.out.println("meotod solicitarChat / "+ "ip:"+ip+" puerto :"+puerto);
     	try {
-    		Socket socket = new Socket(ip,puerto);
+    		socket = new Socket(ip,puerto);
             this.solicitud = true;
-            InputStreamReader  inSocket= new InputStreamReader(socket.getInputStream());
-            BufferedReader in = new BufferedReader(inSocket);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(Usuario.getInstance().getNombre());
+            this.inSocket= new InputStreamReader(socket.getInputStream());
+            this.in = new BufferedReader(inSocket);
+            this.out = new PrintWriter(socket.getOutputStream(), true);
+            this.out.println(Usuario.getInstance().getNombre());
             if (this.solicitud) {
                 controlador.getInstancia().ventanaChat();
             }
@@ -37,31 +43,30 @@ public class Sistema implements Runnable {
     }
     
     public void enviarMensaje(String mensaje) throws IOException {
-    	//pasar a local
-    	ServerSocket socketServer = new ServerSocket(this.user.getPuerto());
-    	Socket socket = socketServer.accept();
-    	PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         out.println(mensaje);
+        System.out.println("metodo enviarMensaje"+mensaje);
     }
 
+    
+    
     @Override
     public void run() {
         try {
         	System.out.println("Modo escucha activado.");
-        	ServerSocket socketServer = new ServerSocket(this.user.getPuerto());
-            escucha = true;
-            Socket socket = socketServer.accept();
+        	this.socketServer = new ServerSocket(this.user.getPuerto());
+        	System.out.println(this.user.getPuerto());
+            this.socket = socketServer.accept();
             socketServer.close();
-            escucha = false;
             socketServer = null;
             
             
             //llamado
             
-            InputStreamReader  inSocket= new InputStreamReader(socket.getInputStream());
-            BufferedReader in = new BufferedReader(inSocket);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(Usuario.getInstance().getNombre());
+            this.inSocket= new InputStreamReader(socket.getInputStream());
+            this.in = new BufferedReader(inSocket);
+            this.out = new PrintWriter(socket.getOutputStream(), true);
+            this.out.println(Usuario.getInstance().getNombre());
+            System.out.println("mi nombre es "+this.user.getNombre()+" y me conecte con mi amiguito "+ this.in.readLine());
             // in.readLine();
             if (this.solicitud) {
                 controlador.getInstancia().ventanaChat();
@@ -72,6 +77,19 @@ public class Sistema implements Runnable {
         } catch (IOException e) {
         }
     }
+
+	public String recibirMensaje() {
+		String mensaje="";
+		System.out.println("metodo recibirMensaje"+mensaje);
+		try {
+			mensaje = this.in.readLine();
+			System.out.println("metodo recibirMensaje"+mensaje);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mensaje;
+	}
 
 
 	

@@ -16,7 +16,7 @@ import vista.Bienvenido;
 import vista.Chat;
 import vista.Inicio;
 
-public class ControladorSistema implements ActionListener {
+public class ControladorSistema implements ActionListener, Runnable {
 
 	
 	private Ivista vista;
@@ -24,6 +24,7 @@ public class ControladorSistema implements ActionListener {
     private JTextField textField;
     private String msj;
     private static ControladorSistema instancia;
+    private Thread comunicacion;
     
     public void setMsj(String msj) {
 		this.msj = msj;
@@ -96,7 +97,6 @@ public class ControladorSistema implements ActionListener {
         	try {
 				Usuario.getInstance().setIp(InetAddress.getLocalHost().getHostAddress());
 			} catch (UnknownHostException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
         	
@@ -110,7 +110,7 @@ public class ControladorSistema implements ActionListener {
         	this.sistema.solicitarChat(ip, puerto);
         	
         	this.vista.cerrar();
-        	this.setVista(new Chat());
+        	//this.setVista(new Chat());
         	
         }else if (comando.equalsIgnoreCase("Enviar")){
         	System.out.println("envio mensajito");
@@ -119,19 +119,42 @@ public class ControladorSistema implements ActionListener {
         	System.out.println(msj);
         	
         	try {
+        		System.out.println("trai" );
                 if (msj != null && !msj.isEmpty()) {
                     this.sistema.enviarMensaje(msj);
                     ventana.getTextArea().append(msj+"\n");
+                    System.out.println("entro" );
                 }
             } catch (IOException ex) {
+            	System.out.println("catch" );
                 throw new RuntimeException(ex);
             }
+        	System.out.println("sigo" );
         }
     }
     
     public void ventanaChat() {
     	this.vista.cerrar();
     	this.setVista(new Chat());
+    	this.comunicacion = new Thread(this);
+    	this.comunicacion.start();
     }
+
+	@Override
+	public void run() {
+		Chat vista = (Chat) this.vista;
+		try {
+			String mensaje =  this.sistema.recibirMensaje();
+			vista.getTextArea().append(mensaje);
+			//while(true) {
+				
+				//this.vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
+				
+			//}
+		}finally {
+			
+		}
+		
+	}
 	
 }

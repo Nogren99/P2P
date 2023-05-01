@@ -9,10 +9,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.awt.CardLayout;
 import java.awt.Font;
 
-public class SalaDeEspera extends JFrame {
+public class SalaDeEspera extends JFrame implements Ivista {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -82,6 +83,24 @@ public class SalaDeEspera extends JFrame {
 		
 		this.panel_2 = new JPanel();
 		this.contentPane.add(this.panel_2);
+	}
+
+	@Override
+	public void cerrar() {
+		this.dispose();
+		
+	}
+
+	@Override
+	public void mostrar() {
+		this.setVisible(true);
+		
+	}
+
+	@Override
+	public void setActionListener(ActionListener actionListener) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

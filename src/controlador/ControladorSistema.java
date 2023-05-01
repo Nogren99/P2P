@@ -15,6 +15,7 @@ import vista.SistemaDeMensajeria;
 import vista.Bienvenido;
 import vista.Chat;
 import vista.Inicio;
+import vista.SalaDeEspera;
 
 public class ControladorSistema implements ActionListener, Runnable {
 
@@ -79,7 +80,7 @@ public class ControladorSistema implements ActionListener, Runnable {
             hilo.start();
 
         	this.vista.cerrar();
-        	this.setVista(new Chat());        	
+        	//this.setVista(new Chat());        	
         	
         	
         //=====VENTANA DE BIENVENIDO====
@@ -120,6 +121,10 @@ public class ControladorSistema implements ActionListener, Runnable {
             }
         }
     }
+    public void ventanaEspera() {
+    	this.vista.cerrar();
+    	this.setVista(new SalaDeEspera());
+    }
     
     public void ventanaChat() {
     	this.vista.cerrar();
@@ -132,18 +137,16 @@ public class ControladorSistema implements ActionListener, Runnable {
 	public void run() {
 		Chat vista = (Chat) this.vista;
 		try {
+			while (!Sistema.getInstancia().getSocket().isInputShutdown()){
+				String mensaje =  this.sistema.recibirMensaje();
+				vista.getTextArea().setEditable(true);
+				//System.out.println("mensaje de:"+Sistema.getInstancia().getIn().readLine());
+				System.out.println("el mensaje:"+mensaje);
+				vista.getTextArea().append("Tu contacto: "+mensaje+"\n");
+				vista.getTextArea().setEditable(false);
+				
+			}
 			
-			String mensaje =  this.sistema.recibirMensaje();
-			vista.getTextArea().setEditable(true);
-			vista.getTextArea().append(mensaje);
-			vista.getTextArea().setEditable(false);
-			//while(true) {
-				
-				//this.vista.agregarMensaje(Usuario.getInstance().getSesionActual().getRemoto().getUsername() + ": " + mensaje);
-				
-			//}
-			// Lee el primer caracter para checkear que siga establecida la conexion
-            
 		}/*catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -120,7 +120,7 @@ public class Bienvenido extends JFrame implements Ivista {
 		this.panel_1.add(this.panel_18);
 		
 		this.panel_9 = new JPanel();
-		this.panel_9.setBackground(new Color(156, 191, 181));
+		this.panel_9.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_9);
 		
 		this.lblNewLabel_3 = new JLabel();

@@ -118,7 +118,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_1.add(this.panel_18);
 		
 		this.panel_9 = new JPanel();
-		this.panel_9.setBackground(new Color(156, 191, 181));
+		this.panel_9.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_9);
 		
 		this.lblNewLabel_3 = new JLabel();
@@ -138,8 +138,8 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.lblNewLabel = new JLabel("Configuración del Servidor");
-		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
+		this.lblNewLabel = new JLabel("Configuración Servidor");
+		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 14));
 		this.panel_5.add(this.lblNewLabel);
 		
 		this.panel_6 = new JPanel();

@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.Color;
 
 public class SalaDeEspera extends JFrame implements Ivista {
 
@@ -54,6 +55,7 @@ public class SalaDeEspera extends JFrame implements Ivista {
 		this.contentPane.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		this.panel = new JPanel();
+		this.panel.setBackground(new Color(195, 222, 214));
 		this.contentPane.add(this.panel);
 		
 		this.panel_1 = new JPanel();
@@ -61,27 +63,34 @@ public class SalaDeEspera extends JFrame implements Ivista {
 		this.panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		this.panel_3 = new JPanel();
+		this.panel_3.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_3);
 		
 		this.panel_6 = new JPanel();
+		this.panel_6.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_6);
 		
 		this.panel_4 = new JPanel();
+		this.panel_4.setBackground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_4);
 		this.panel_4.setLayout(new BorderLayout(0, 0));
 		
 		this.lblNewLabel = new JLabel("Sala de");
+		this.lblNewLabel.setBackground(Color.GRAY);
 		this.lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		this.panel_4.add(this.lblNewLabel, BorderLayout.NORTH);
 		
 		this.lblNewLabel_1 = new JLabel("Espera");
+		this.lblNewLabel_1.setBackground(new Color(195, 222, 214));
 		this.lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		this.panel_4.add(this.lblNewLabel_1);
 		
 		this.panel_5 = new JPanel();
+		this.panel_5.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_5);
 		
 		this.panel_2 = new JPanel();
+		this.panel_2.setBackground(new Color(195, 222, 214));
 		this.contentPane.add(this.panel_2);
 	}
 

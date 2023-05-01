@@ -82,12 +82,12 @@ public class Chat extends JFrame implements Ivista, WindowListener {
 		this.panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		this.panel_6 = new JPanel();
-		this.panel_6.setBackground(new Color(102, 205, 170));
+		this.panel_6.setBackground(new Color(195, 222, 214));
 		this.panel.add(this.panel_6);
 		this.panel_6.setLayout(new BorderLayout(0, 0));
 		
 		this.panel_8 = new JPanel();
-		this.panel_8.setBackground(new Color(102, 205, 170));
+		this.panel_8.setBackground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_8, BorderLayout.CENTER);
 		this.panel_8.setLayout(new BorderLayout(0, 0));
 		
@@ -98,20 +98,20 @@ public class Chat extends JFrame implements Ivista, WindowListener {
 		scrollPane.setViewportView(textArea);
 		
 		this.panel_9 = new JPanel();
-		this.panel_9.setBackground(new Color(102, 205, 170));
-		this.panel_9.setForeground(new Color(102, 205, 170));
+		this.panel_9.setBackground(new Color(195, 222, 214));
+		this.panel_9.setForeground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_9, BorderLayout.NORTH);
 		
 		this.panel_10 = new JPanel();
-		this.panel_10.setBackground(new Color(102, 205, 170));
+		this.panel_10.setBackground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_10, BorderLayout.SOUTH);
 		
 		this.panel_11 = new JPanel();
-		this.panel_11.setBackground(new Color(102, 205, 170));
+		this.panel_11.setBackground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_11, BorderLayout.WEST);
 		
 		this.panel_12 = new JPanel();
-		this.panel_12.setBackground(new Color(102, 205, 170));
+		this.panel_12.setBackground(new Color(195, 222, 214));
 		this.panel_6.add(this.panel_12, BorderLayout.EAST);
 		
 		this.panel_1 = new JPanel();
@@ -127,23 +127,23 @@ public class Chat extends JFrame implements Ivista, WindowListener {
 		this.textField.setColumns(10);
 		
 		this.panel_4 = new JPanel();
-		this.panel_4.setBackground(new Color(102, 205, 170));
+		this.panel_4.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_4, BorderLayout.NORTH);
 		
 		this.panel_5 = new JPanel();
-		this.panel_5.setBackground(new Color(102, 205, 170));
+		this.panel_5.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_5, BorderLayout.SOUTH);
 		
 		this.panel_18 = new JPanel();
-		this.panel_18.setBackground(new Color(102, 205, 170));
+		this.panel_18.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_18, BorderLayout.WEST);
 		
 		this.panel_19 = new JPanel();
-		this.panel_19.setBackground(new Color(102, 205, 170));
+		this.panel_19.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_19, BorderLayout.EAST);
 		
 		this.panel_3 = new JPanel();
-		this.panel_3.setBackground(new Color(102, 205, 170));
+		this.panel_3.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_3, BorderLayout.EAST);
 		
 		this.btnNewButton = new JButton("Enviar ");

@@ -60,7 +60,7 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.contentPane.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		this.panel = new JPanel();
-		this.panel.setBackground(new Color(102, 205, 170));
+		this.panel.setBackground(new Color(195, 222, 214));
 		this.contentPane.add(this.panel);
 		
 		this.panel_1 = new JPanel();
@@ -68,12 +68,12 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		this.panel_3 = new JPanel();
-		this.panel_3.setBackground(new Color(102, 205, 170));
+		this.panel_3.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_3);
 		this.panel_3.setLayout(new BorderLayout(0, 0));
 		
 		this.panel_7 = new JPanel();
-		this.panel_7.setBackground(new Color(102, 205, 170));
+		this.panel_7.setBackground(new Color(195, 222, 214));
 		this.panel_7.setBorder(null);
 		this.panel_3.add(this.panel_7, BorderLayout.CENTER);
 		this.panel_7.setLayout(new BorderLayout(0, 0));
@@ -83,14 +83,14 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 16));
 		
 		this.panel_4 = new JPanel();
-		this.panel_4.setBackground(new Color(102, 205, 170));
+		this.panel_4.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_4);
 		
-		this.lblNewLabel_1 = new JLabel("(fotito)");
+		this.lblNewLabel_1 = new JLabel("");
 		this.panel_4.add(this.lblNewLabel_1);
 		
 		this.panel_5 = new JPanel();
-		this.panel_5.setBackground(new Color(102, 205, 170));
+		this.panel_5.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_5);
 		
 		this.lblNewLabel_2 = new JLabel("No se pudo conectar al usuario, revise IP y puerto ");
@@ -98,7 +98,7 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.panel_5.add(this.lblNewLabel_2);
 		
 		this.panel_6 = new JPanel();
-		this.panel_6.setBackground(new Color(102, 205, 170));
+		this.panel_6.setBackground(new Color(195, 222, 214));
 		this.panel_1.add(this.panel_6);
 		
 		this.btnNewButton = new JButton("Volver a intentar");
@@ -106,7 +106,7 @@ public class ConexionDenegada extends JFrame implements Ivista {
 		this.panel_6.add(this.btnNewButton);
 		
 		this.panel_2 = new JPanel();
-		this.panel_2.setBackground(new Color(102, 205, 170));
+		this.panel_2.setBackground(new Color(195, 222, 214));
 		this.contentPane.add(this.panel_2);
 	}
 

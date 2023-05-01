@@ -12,6 +12,12 @@ Se construyó un sistema de mensajería P2P el cual seguía las características
 * Para comenzar una sesión, el usuario iniciador debe ingresar la dirección IP y puerto que corresponde al usuario con el que quiere establecer el diálogo.
 * El sistema respetará el estilo de arquitectura Peer to Peer.
 
+# Arquitectura
+Se optó por utilizar una arquitectura MVC (modelo, vista, controlador) la cual permitió una separación en tres componentes. Los datos, la metodología y la interfaz gráfica de la aplicación. Algunas de las ventajas que brindó esta arquitectura fueron:
+* Separación clara de dónde tiene que ir cada tipo de lógica, facilitando el mantenimiento y la escalabilidad de nuestra aplicación.
+* Sencillez para crear distintas representaciones de los mismos datos.
+* Reutilización de los componentes.
+
 # ¿Como se puede ejecutar?
 Descargue los archivos ejecutables .jar. Una vez descargado debe darle doble click para poder abrirlo.
 

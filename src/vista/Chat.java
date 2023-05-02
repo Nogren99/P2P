@@ -162,8 +162,6 @@ public class Chat extends JFrame implements Ivista, WindowListener {
 		this.setVisible(true);
 	}
 	
-	
-
 	@Override
 	public void setActionListener(ActionListener actionListener) {
 		this.btnNewButton.addActionListener(actionListener);
@@ -188,46 +186,31 @@ public class Chat extends JFrame implements Ivista, WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
 		ControladorSistema.getInstancia().cerrarVentana();
-		
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
-	
-
 }

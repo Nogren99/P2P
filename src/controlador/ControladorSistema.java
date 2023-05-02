@@ -6,10 +6,8 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import modelo.Usuario;
 import negocio.Sistema;
 import vista.Ivista;
@@ -21,7 +19,6 @@ import vista.SalaDeEspera;
 
 public class ControladorSistema implements ActionListener, Runnable {
 
-	
 	private Ivista vista;
 	private WindowListener escuchaVentana;
     private Sistema sistema = Sistema.getInstancia();
@@ -46,8 +43,7 @@ public class ControladorSistema implements ActionListener, Runnable {
         this.vista.mostrar();
     }
     
-    public Ivista getVista()
-    {
+    public Ivista getVista(){
         return vista;
     }
 
@@ -61,7 +57,7 @@ public class ControladorSistema implements ActionListener, Runnable {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         //System.out.println("Comando: " + comando);
-        
+       
         if (comando.equalsIgnoreCase("Crear")) {
         	this.vista.cerrar();
         	this.setVista(new Inicio());
@@ -92,8 +88,7 @@ public class ControladorSistema implements ActionListener, Runnable {
 
         	this.vista.cerrar();
         	//this.setVista(new Chat());        	
-        	
-        	
+
         //=====VENTANA DE BIENVENIDO====
         } else if (comando.equalsIgnoreCase("Conectarse")){
         	Bienvenido ventana = (Bienvenido) this.vista;
@@ -115,7 +110,6 @@ public class ControladorSistema implements ActionListener, Runnable {
         	this.sistema.solicitarChat(ip, puerto);
         	this.vista.cerrar();
         	
-        	
         //====VENTANA DE CHAT====
         }else if (comando.equalsIgnoreCase("Enviar")){
         	Chat ventana = (Chat) this.vista;
@@ -132,6 +126,7 @@ public class ControladorSistema implements ActionListener, Runnable {
             }
         }
     }
+    
     public void ventanaEspera() {
     	this.vista.cerrar();
     	this.setVista(new SalaDeEspera());
@@ -147,8 +142,6 @@ public class ControladorSistema implements ActionListener, Runnable {
     public void cerrarVentana() {
     	System.out.println("cierro ventana");
     	Sistema.getInstancia().cerrarSockets();
-    	/////////////////mando mengaje a la red
-    	
     	this.comunicacion.interrupt();
     }
 
@@ -171,13 +164,9 @@ public class ControladorSistema implements ActionListener, Runnable {
 			}
 			this.vista.cerrar();
 			this.cerrarVentana();
-		}/*catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		}
 		finally {
 		}
-		
 	}
 	
 }

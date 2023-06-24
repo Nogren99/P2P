@@ -76,15 +76,16 @@ public class Sistema implements Runnable {
 			this.socketServer = new ServerSocket(this.user.getPuerto());
 			System.out.println(this.user.getPuerto());
 			// ControladorSistema.getInstancia().ventanaEspera();
-			this.socket = socketServer.accept();
+			while(true) {
+				this.socket = socketServer.accept();
 
-			ObjectInputStream flujoEntrada = new ObjectInputStream(socket.getInputStream());
-			this.flujoSalida = new ObjectOutputStream(socket.getOutputStream());
+				ObjectInputStream flujoEntrada = new ObjectInputStream(socket.getInputStream());
+				this.flujoSalida = new ObjectOutputStream(socket.getOutputStream());
+
+				Thread userThread = new Thread(new EscucharUsuario(socket, flujoEntrada, this.flujoSalida));
+				userThread.start();
+			}
 			
-			
-			EscucharUsuario escucharUsuario = new EscucharUsuario(socket, flujoEntrada, this.flujoSalida);
-			Thread userThread = new Thread(escucharUsuario);
-			userThread.start();
 
 		} catch (IOException e) {
 		}
@@ -95,15 +96,10 @@ public class Sistema implements Runnable {
 		private Socket usuario;
 		private ObjectInputStream flujoEntrada;
 		private ObjectOutputStream flujoSalida;
-		boolean estoyEnLlamada = false;
 		private String nombreInterlocutor;
 		private boolean aceptada;
 		
 		
-
-		public void setEstoyEnLlamada(boolean estoyEnLlamada) {
-			this.estoyEnLlamada = estoyEnLlamada;
-		}
 
 		
 		public EscucharUsuario(Socket usuario, ObjectInputStream flujoEntrada, ObjectOutputStream flujoSalida) {
@@ -148,15 +144,12 @@ public class Sistema implements Runnable {
 						if(confirmacion.isConfirmacion()) {
 							ControladorSistema.getInstancia().setSolicitante(true);
 							this.aceptada=true;
-							this.estoyEnLlamada=true;
+							estoyEnLlamada=true;
 							System.out.println("Me confirmaron");
-							ControladorSistema.getInstancia().ventanaChatSolicitante();
+							ControladorSistema.getInstancia().ventanaChatSolicitante(confirmacion.getNombreSolicitante());
 							System.out.println("==ventana de chat confirmacion== ");
 						}else
 							JOptionPane.showMessageDialog(null, "Tu solicitud ha sido rechazada :(");
-
-						// flujoSalida = new ObjectOutputStream(usuario.getOutputStream()); // usuario?
-						// flujoSalida.writeObject(confirmacion.isConfirmacion());
 
 					}  else if (object instanceof Mensaje) {
 						Mensaje mensaje = (Mensaje) object;
@@ -165,6 +158,7 @@ public class Sistema implements Runnable {
 	        			JOptionPane.showMessageDialog(null, "El usuario no está disponible!");
 	        		} else if (object instanceof ConexionTerminada){
 	        			estoyEnLlamada=false;
+	        			JOptionPane.showMessageDialog(null, "Conexion terminada!");
 	        			ControladorSistema.getInstancia().abrirVentanaEspera();       			
 	        		} else {
 	        			System.out.println("objeto recibido:"+object.toString());
@@ -182,7 +176,7 @@ public class Sistema implements Runnable {
 	
 	public void cerrarConexion(String nombreDestinatario) {
 		try {
-			//this.setEstoyEnLlamada(false);
+			estoyEnLlamada=false;
 			this.flujoSalida.writeObject(new ConexionTerminada(nombreDestinatario));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

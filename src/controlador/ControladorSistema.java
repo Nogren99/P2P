@@ -11,11 +11,9 @@ import javax.swing.JTextField;
 import modelo.Usuario;
 import negocio.Sistema;
 import vista.Ivista;
-import vista.SistemaDeMensajeria;
 import vista.Bienvenido;
 import vista.Chat;
 import vista.Inicio;
-import vista.SalaDeEspera;
 
 public class ControladorSistema implements ActionListener, Runnable {
 
@@ -144,12 +142,12 @@ public class ControladorSistema implements ActionListener, Runnable {
 	}
 	
 	
-	public void ventanaChatSolicitante() {
+	public void ventanaChatSolicitante(String nombre) {
 		this.vista.cerrar();
 		System.out.println("deberia cerrar vista solicitante");
 		this.setVista(new Chat());
 		Chat chat = (Chat) this.vista;
-		chat.getLblChatCon().setText("Chat con: " + this.nombreDestinatario);
+		chat.getLblChatCon().setText("Chat con: " + nombre);
 	}
 
 	public void ventanaChatSolicitado(String nombre) {

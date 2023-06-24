@@ -17,7 +17,7 @@ import vista.Chat;
 import vista.Inicio;
 import vista.SalaDeEspera;
 
-public class ControladorSistema implements ActionListener, Runnable {
+public class ControladorSistema implements ActionListener {
 
 	private Ivista vista;
 	private WindowListener escuchaVentana;
@@ -26,6 +26,7 @@ public class ControladorSistema implements ActionListener, Runnable {
     private String msj;
     private static ControladorSistema instancia;
     private Thread comunicacion;
+    private boolean isSolicitante;
     
     public void setMsj(String msj) {
 		this.msj = msj;
@@ -107,25 +108,52 @@ public class ControladorSistema implements ActionListener, Runnable {
         	System.out.println("me conecto a:"+ip+ "puerto"+puerto);
         	
         	//SOLICITO INICIAR CHAT
-        	this.sistema.solicitarChat(ip, puerto);
-        	this.vista.cerrar();
+        	this.sistema.solicitarChat(ip, puerto,Usuario.getInstance().getNombre());
+        	
         	
         //====VENTANA DE CHAT====
         }else if (comando.equalsIgnoreCase("Enviar")){
         	Chat ventana = (Chat) this.vista;
-        	String msj = ventana.getTextField().getText();
-        	System.out.println("mensaje: "+msj);
-        	
-        	try {
-                if (msj != null && !msj.isEmpty()) {
-                    this.sistema.enviarMensaje(msj);
-                    ventana.getTextArea().append(Usuario.getInstance().getNombre()+" : " +msj+"\n");
-                }
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+			String msj = ventana.getTextField().getText();
+			System.out.println("mensaje: "+msj);
+			ventana.getTextField().setText("");
+
+			if (msj != null && !msj.isEmpty()) {
+				ventana.getTextArea().append(Usuario.getInstance().getNombre() + " (Tu) : " + msj + "\n");
+				if (this.isSolicitante) {
+					Sistema.getInstancia().enviarMensaje(msj, Usuario.getInstance().getNombre(),"destinatario");
+				} else if (this.isSolicitante == false) {
+					Sistema.getInstancia().enviarMensaje(msj, Usuario.getInstance().getNombre(),"interlocutor");
+				}
+
+			}
         }
     }
+    
+    
+	public boolean isSolicitante() {
+		return isSolicitante;
+	}
+
+	public void setSolicitante(boolean isSolicitante) {
+		this.isSolicitante = isSolicitante;
+	}
+	
+	
+	public void ventanaChatSolicitante() {
+		this.vista.cerrar();
+		this.setVista(new Chat());
+		Chat chat = (Chat) this.vista;
+		//chat.getLblChatCon().setText("Chat con: " + this.nombreDestinatario);
+	}
+
+	public void ventanaChatSolicitado(String nombre) {
+		this.vista.cerrar();
+		this.setVista(new Chat());
+		//this.nombreSolicitante = nombre;
+		Chat chat = (Chat) this.vista;
+		//chat.getLblChatCon().setText("Chat con: " + nombre);
+	}
     
     public void ventanaEspera() {
     	this.vista.cerrar();
@@ -135,7 +163,7 @@ public class ControladorSistema implements ActionListener, Runnable {
     public void ventanaChat() {
     	this.vista.cerrar();
     	this.setVista(new Chat());
-    	this.comunicacion = new Thread(this);
+    	//this.comunicacion = new Thread(this);
     	this.comunicacion.start();
     }
     
@@ -144,29 +172,13 @@ public class ControladorSistema implements ActionListener, Runnable {
     	Sistema.getInstancia().cerrarSockets();
     	this.comunicacion.interrupt();
     }
-
-	@Override
-	public void run() {
-		Chat vista = (Chat) this.vista;
-		try {
-			while (!Sistema.getInstancia().getSocket().isInputShutdown() ){
-				String mensaje =  this.sistema.recibirMensaje();
-				//Si el mensaje es null es debido a que el otro usuario cerro la comunicacion
-				if (mensaje==null) 
-	                break;
-				else {
-					vista.getTextArea().setEditable(true);
-					//System.out.println("mensaje de:"+Sistema.getInstancia().getIn().readLine());
-					System.out.println("el mensaje:"+mensaje);
-					vista.getTextArea().append("Tu contacto: "+mensaje+"\n");
-					vista.getTextArea().setEditable(false);
-				}
-			}
-			this.vista.cerrar();
-			this.cerrarVentana();
-		}
-		finally {
-		}
+    
+	public void actualizaChat(String nombre, String mensaje) {
+		Chat chat = (Chat) this.vista;
+		chat.getTextArea().append(nombre + " : " + mensaje + "\n");
 	}
+
+
+	
 	
 }

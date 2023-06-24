@@ -48,7 +48,6 @@ public class Bienvenido extends JFrame implements Ivista {
 	private JLabel lblNewLabel_2;
 	private JTextField textField_1;
 	private JLabel lblNewLabel_4;
-	private JTextField textField_2;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -135,12 +134,8 @@ public class Bienvenido extends JFrame implements Ivista {
 		this.panel_4.setBackground(new Color(195, 222, 214));
 		this.panel_2.add(this.panel_4);
 		
-		lblNewLabel_4 = new JLabel("Ingresa tu nombre");
+		lblNewLabel_4 = new JLabel("Estas en modo escucha!");
 		panel_4.add(lblNewLabel_4);
-		
-		textField_2 = new JTextField();
-		panel_4.add(textField_2);
-		textField_2.setColumns(10);
 		
 		this.panel_5 = new JPanel();
 		this.panel_5.setBackground(new Color(195, 222, 214));
@@ -216,9 +211,7 @@ public class Bienvenido extends JFrame implements Ivista {
 		return textField_1;
 	}
 	
-	public JTextField getTextField_2() {
-		return textField_2;
-	}
+
 
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;

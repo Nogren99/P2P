@@ -138,7 +138,7 @@ public class Inicio extends JFrame implements Ivista {
 		this.panel_2.add(this.panel_5);
 		this.panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.lblNewLabel = new JLabel("Configuración Servidor");
+		this.lblNewLabel = new JLabel("Iniciar Sesión");
 		this.lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 14));
 		this.panel_5.add(this.lblNewLabel);
 		

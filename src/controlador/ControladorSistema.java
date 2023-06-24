@@ -17,7 +17,7 @@ import vista.Chat;
 import vista.Inicio;
 import vista.SalaDeEspera;
 
-public class ControladorSistema implements ActionListener {
+public class ControladorSistema implements ActionListener, Runnable {
 
 	private Ivista vista;
 	private WindowListener escuchaVentana;
@@ -27,6 +27,8 @@ public class ControladorSistema implements ActionListener {
     private static ControladorSistema instancia;
     private Thread comunicacion;
     private boolean isSolicitante;
+    private String nombreDestinatario;
+    private String nombreSolicitante;
     
     public void setMsj(String msj) {
 		this.msj = msj;
@@ -39,7 +41,7 @@ public class ControladorSistema implements ActionListener {
     }
 
 	public ControladorSistema() {
-        this.vista = new SistemaDeMensajeria();
+        this.vista = new Inicio();
         this.vista.setActionListener(this);
         this.vista.mostrar();
     }
@@ -59,15 +61,9 @@ public class ControladorSistema implements ActionListener {
         String comando = e.getActionCommand();
         //System.out.println("Comando: " + comando);
        
-        if (comando.equalsIgnoreCase("Crear")) {
-        	this.vista.cerrar();
-        	this.setVista(new Inicio());
-        }else if (comando.equalsIgnoreCase("Unirse")) {
-        	this.vista.cerrar();
-        	this.setVista(new Bienvenido());
         	
         //====VENTANA DE CONFIGURACION=====
-        }else if (comando.equalsIgnoreCase("Iniciar Sesión")) {
+        if (comando.equalsIgnoreCase("Iniciar Sesión")) {
         	Inicio ventana = (Inicio) this.vista;
         	
         	int puerto = Integer.parseInt( ventana.getTextField_1().getText() );
@@ -88,6 +84,7 @@ public class ControladorSistema implements ActionListener {
             hilo.start();
 
         	this.vista.cerrar();
+        	this.setVista(new Bienvenido());
         	//this.setVista(new Chat());        	
 
         //=====VENTANA DE BIENVENIDO====
@@ -95,7 +92,7 @@ public class ControladorSistema implements ActionListener {
         	Bienvenido ventana = (Bienvenido) this.vista;
         	
         	//MIS DATOS:
-        	Usuario.getInstance().setNombre(ventana.getTextField_2().getText());
+        	//Usuario.getInstance().setNombre(ventana.getTextField_2().getText());
         	try {
 				Usuario.getInstance().setIp(InetAddress.getLocalHost().getHostAddress());
 			} catch (UnknownHostException e1) {
@@ -108,7 +105,7 @@ public class ControladorSistema implements ActionListener {
         	System.out.println("me conecto a:"+ip+ "puerto"+puerto);
         	
         	//SOLICITO INICIAR CHAT
-        	this.sistema.solicitarChat(ip, puerto,Usuario.getInstance().getNombre());
+        	Sistema.getInstancia().solicitarChat(ip, puerto,Usuario.getInstance().getNombre());
         	
         	
         //====VENTANA DE CHAT====
@@ -127,7 +124,14 @@ public class ControladorSistema implements ActionListener {
 				}
 
 			}
-        }
+        }else if (comando.equalsIgnoreCase("Cerrar")) {
+			this.vista.cerrar();
+			this.setVista(new Bienvenido());
+			if (this.isSolicitante())
+				Sistema.getInstancia().cerrarConexion(Usuario.getInstance().getNombre());
+			else
+				Sistema.getInstancia().cerrarConexion(Usuario.getInstance().getNombre());
+		}
     }
     
     
@@ -142,43 +146,49 @@ public class ControladorSistema implements ActionListener {
 	
 	public void ventanaChatSolicitante() {
 		this.vista.cerrar();
+		System.out.println("deberia cerrar vista solicitante");
 		this.setVista(new Chat());
 		Chat chat = (Chat) this.vista;
-		//chat.getLblChatCon().setText("Chat con: " + this.nombreDestinatario);
+		chat.getLblChatCon().setText("Chat con: " + this.nombreDestinatario);
 	}
 
 	public void ventanaChatSolicitado(String nombre) {
 		this.vista.cerrar();
+		System.out.println("deberia cerrar vista solicitado");
 		this.setVista(new Chat());
-		//this.nombreSolicitante = nombre;
+		this.nombreSolicitante = nombre;
 		Chat chat = (Chat) this.vista;
-		//chat.getLblChatCon().setText("Chat con: " + nombre);
+		chat.getLblChatCon().setText("Chat con: " + nombre);
 	}
-    
-    public void ventanaEspera() {
-    	this.vista.cerrar();
-    	this.setVista(new SalaDeEspera());
-    }
-    
-    public void ventanaChat() {
-    	this.vista.cerrar();
-    	this.setVista(new Chat());
-    	//this.comunicacion = new Thread(this);
-    	this.comunicacion.start();
-    }
-    
-    public void cerrarVentana() {
-    	System.out.println("cierro ventana");
-    	Sistema.getInstancia().cerrarSockets();
-    	this.comunicacion.interrupt();
-    }
     
 	public void actualizaChat(String nombre, String mensaje) {
 		Chat chat = (Chat) this.vista;
 		chat.getTextArea().append(nombre + " : " + mensaje + "\n");
 	}
-
-
 	
+    public void ventanaChat() {
+    	this.vista.cerrar();
+    	this.setVista(new Chat());
+    	this.comunicacion = new Thread(this);
+    	this.comunicacion.start();
+    }
+    
+    public void cerrarVentana() {
+    	System.out.println("cierro ventana");
+    	this.comunicacion.interrupt();
+    }
+    
+	
+	public void abrirVentanaEspera() {
+		this.vista.cerrar();
+		JOptionPane.showMessageDialog(null, "Tu contacto terminó la conexión!");
+		this.setVista(new Bienvenido());
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

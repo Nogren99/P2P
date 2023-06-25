@@ -56,6 +56,7 @@ public class Sistema implements Runnable {
 		} catch (IOException e) {
 		}
 	}
+	
 
 	public void enviarMensaje(String mensaje, String nombre, String nombreDestinatario) {
 
@@ -127,7 +128,7 @@ public class Sistema implements Runnable {
 								System.out.println("le acepte el chat al gil este");
 								ControladorSistema.getInstancia().setSolicitante(false);
 								this.nombreInterlocutor=solicitud.getNombrePropio();
-								flujoSalida.writeObject(new ConfirmacionSolicitud(true, solicitud.getNombrePropio()));
+								flujoSalida.writeObject(new ConfirmacionSolicitud(true, Usuario.getInstance().getNombre()));
 	
 								ControladorSistema.getInstancia().ventanaChatSolicitado(solicitud.getNombrePropio()); // mandar
 																														// nombre
